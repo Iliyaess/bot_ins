@@ -34,7 +34,7 @@ function qrUrl(cfg) {
 }
 
 function ladder() {
-  const min = 2350, max = 3847, heightMm = 34;
+  const min = 2350, max = 3847, heightMm = 32;
   return STATIONS.map((s) => {
     const bottom = ((s.alt - min) / (max - min)) * heightMm;
     const alt = s.alt.toLocaleString('ru-RU').replace(/ /g, ' ');
@@ -100,12 +100,12 @@ function html(cfg, qrSvg) {
   /* Оборот */
   .back h2 { font-family: 'Forum', 'DejaVu Serif', serif; font-weight: 400; font-size: 17pt; line-height: 1.05; margin: 0; color: #0E6B66; }
   .back .lead { font-size: 7.8pt; color: #4A5A57; margin-top: 1.4mm; line-height: 1.35; }
-  .ladder { position: relative; height: 34mm; margin: 5.5mm 0 0 1.5mm; border-left: .5mm solid #0E6B66; }
+  .ladder { position: relative; height: 32mm; margin: 5mm 0 0 1.5mm; border-left: .5mm solid #0E6B66; }
   .st { position: absolute; left: 0; transform: translateY(50%); display: flex; align-items: baseline; gap: 2.4mm; }
   .st i { position: absolute; left: -1.55mm; top: 50%; width: 2.6mm; height: 2.6mm; margin-top: -1.3mm; border-radius: 50%; background: #0E6B66; border: .5mm solid #fff; }
   .st b { margin-left: 3.6mm; font-size: 9.6pt; font-weight: 700; font-variant-numeric: tabular-nums; }
   .st span { font-size: 8pt; color: #4A5A57; }
-  .notes { margin: 6.5mm 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 1.6mm; font-size: 7.8pt; line-height: 1.35; }
+  .notes { margin: 6mm 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 1.6mm; font-size: 7.8pt; line-height: 1.35; }
   .notes li { padding-left: 3.2mm; position: relative; }
   .notes li::before { content: ''; position: absolute; left: 0; top: 1.25mm; width: 1.4mm; height: 1.4mm; background: #0E6B66; border-radius: .3mm; }
   .qr-box { position: absolute; left: 7mm; right: 7mm; bottom: 7mm; display: grid; grid-template-columns: 34mm 1fr; gap: 4mm; align-items: center;
@@ -143,12 +143,9 @@ function html(cfg, qrSvg) {
   <section class="page back">
     <div class="safe">
       <h2>Памятка: подъём на Эльбрус</h2>
-      <div class="lead">Канатная дорога идёт от поляны Азау до станции Гарабаши, около 30 минут в одну сторону.</div>
+      <div class="lead">${esc(cfg.elbrusLead)}</div>
       <div class="ladder">${ladder()}</div>
-      <ul class="notes">
-        <li>Наверху холодно даже летом: возьмите тёплую куртку, шапку, солнцезащитные очки и крем.</li>
-        <li>При болезнях сердца и сосудов подъём на высоту не рекомендуют. Спросите лечащего врача.</li>
-      </ul>
+      <ul class="notes">${cfg.notes.map((n) => `<li>${esc(n)}</li>`).join('')}</ul>
     </div>
     <div class="qr-box">
       <div class="qr">${qrSvg}${sampleMark}</div>
