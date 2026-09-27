@@ -1,0 +1,14 @@
+{
+  "name": "flyer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Листовка A6 с QR-кодом на бота MAX: PDF для типографии и превью",
+  "scripts": {
+    "build": "node make-flyer.js"
+  },
+  "dependencies": {
+    "@fontsource/forum": "^5.3.0",
+    "@fontsource/golos-text": "^5.3.0",
+    "qrcode": "^1.5.4"
+  }
+}
